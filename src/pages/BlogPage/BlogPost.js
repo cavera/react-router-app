@@ -10,13 +10,11 @@ const BlogPost = () => {
 
 	const auth = useAuth();
 
-	const blogPost = blogList.find((post) => {
-		return post.slug === slug;
-	});
+	const blogPost = blogList.find((post) => post.slug === slug);
 
 	// const canDelete = !!auth.user?.isAdmin || blogPost.author === auth.user?.username;
-	const canDelete = auth.user?.role().delete;
-	const canEdit = auth.user?.role().edit || blogPost.author === auth.user?.username;
+	const canDelete = auth.user?.userRole().delete;
+	const canEdit = auth.user?.userRole().edit || blogPost.author === auth.user?.username;
 
 	const returnToBlog = () => {
 		navigate(`/blog`);

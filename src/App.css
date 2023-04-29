@@ -79,13 +79,14 @@ article {
 	padding: 1em;
 	border-radius: 1rem;
 }
-.BlogPost-form label {
+label {
 	font-weight: bold;
 	margin-bottom: 0.2rem;
 	display: block;
 }
-.BlogPost-form input,
-.BlogPost-form textarea {
+
+input,
+textarea {
 	width: 100%;
 	padding: 0.3rem;
 	border: 0;
@@ -96,9 +97,8 @@ article {
 	color: #fff;
 	margin-bottom: 1rem;
 }
-.BlogPost-form input {
-}
-.BlogPost-form textarea {
+
+textarea {
 	height: auto;
 	min-height: 50px;
 	max-height: 300px;

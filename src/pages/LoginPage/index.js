@@ -22,6 +22,7 @@ function LoginPage() {
 				<label htmlFor=''>Escribe tu nombre de usuario.</label>
 				<input
 					type='text'
+					name='username'
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
 				/>

@@ -1,32 +1,8 @@
 import React from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-
-const roleTypes = {
-	ADMIN: { edit: true, delete: true },
-	EDITOR: { edit: true, delete: false },
-	USER: { edit: false, delete: false },
-	AUTHOR: { edit: true, delete: false },
-};
+import { userList, roleTypes } from "../data/users";
 
 // const adminList = ["MaesterRoot", "editor", "Lucy"];
-const userList = [
-	{
-		name: "MasterRoot",
-		role: roleTypes.ADMIN,
-	},
-	{
-		name: "editor",
-		role: roleTypes.EDITOR,
-	},
-	{
-		name: "Lucy",
-		role: roleTypes.USER,
-	},
-	{
-		name: "Dylan",
-		role: roleTypes.AUTHOR,
-	},
-];
 
 const AuthContext = React.createContext();
 
@@ -38,8 +14,9 @@ function AuthProvider({ children }) {
 	const login = ({ username }) => {
 		const from = location.state?.from?.pathname || "/profile";
 
-		const userRole = () => userList.find((userItem) => userItem.name === username)?.role || roleTypes.USER;
-		console.log("userRole", userRole());
+		const userRole = () => {
+			return userList.find((userItem) => userItem.name === username)?.role || roleTypes.USER;
+		};
 		setUser({ username, userRole });
 		navigate(from, { replace: true });
 	};

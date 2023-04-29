@@ -11,7 +11,6 @@ function useBlogData() {
 		try {
 			const storageBlogList = localStorage.getItem(BLOG_LIST);
 			let parsedList = JSON.parse(storageBlogList) || initialData;
-			console.log("parsedList", parsedList);
 			if (!storageBlogList) {
 				localStorage.setItem(BLOG_LIST, JSON.stringify(initialData));
 			} else {
