@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useBlogData } from "./useBlogData";
-import { useAuth } from "./auth";
+import { useBlogData } from "../../services/useBlogData";
+import { useAuth } from "../../services/Auth";
 
 const BlogPost = () => {
 	const { slug } = useParams();
@@ -25,7 +25,6 @@ const BlogPost = () => {
 
 	const editPost = (e) => {
 		e.preventDefault();
-		console.log(slug);
 		navigate(`/blog/${slug}/edit`);
 	};
 	const deletePost = (e) => {

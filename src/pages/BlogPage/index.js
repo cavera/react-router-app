@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import { useBlogData } from "./useBlogData";
+import { useBlogData } from "../../services/useBlogData";
 
 const BlogPage = () => {
 	const { data: blogList } = useBlogData();

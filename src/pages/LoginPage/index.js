@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth } from "./auth";
+import { useAuth } from "../../services/Auth";
 import { Navigate } from "react-router-dom";
 
 function LoginPage() {

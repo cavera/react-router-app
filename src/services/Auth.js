@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const roleTypes = {
 	ADMIN: { edit: true, delete: true },
@@ -8,14 +8,14 @@ const roleTypes = {
 	AUTHOR: { edit: true, delete: false },
 };
 
-// const adminList = ["Leonardo", "Loco", "Lucy"];
+// const adminList = ["MaesterRoot", "editor", "Lucy"];
 const userList = [
 	{
-		name: "Leonardo",
+		name: "MasterRoot",
 		role: roleTypes.ADMIN,
 	},
 	{
-		name: "Loco",
+		name: "editor",
 		role: roleTypes.EDITOR,
 	},
 	{
@@ -33,16 +33,15 @@ const AuthContext = React.createContext();
 function AuthProvider({ children }) {
 	const navigate = useNavigate();
 	const [user, setUser] = React.useState(null);
+	const location = useLocation();
 
 	const login = ({ username }) => {
-		// const isAdmin = adminList.find((admin) => admin === username);
+		const from = location.state?.from?.pathname || "/profile";
 
-		const role = () => userList.find((userItem) => userItem.name === username).role || roleTypes.USER;
-		console.log("role:", role());
-
-		// setUser({ username, isAdmin });
-		setUser({ username, role });
-		navigate("/profile");
+		const userRole = () => userList.find((userItem) => userItem.name === username)?.role || roleTypes.USER;
+		console.log("userRole", userRole());
+		setUser({ username, userRole });
+		navigate(from, { replace: true });
 	};
 	const logout = () => {
 		setUser(null);
@@ -65,8 +64,14 @@ function useAuth() {
 
 function AuthRoute(props) {
 	const auth = useAuth();
+	const location = useLocation();
 	if (!auth.user) {
-		return <Navigate to='/login' />;
+		return (
+			<Navigate
+				to='/login'
+				state={{ from: location }}
+			/>
+		);
 	}
 	return props.children;
 }

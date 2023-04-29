@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useBlogData } from "./useBlogData";
-import { useAuth } from "./auth";
+import { useAuth } from "../../services/Auth";
+import { useBlogData } from "../../services/useBlogData";
 
 const BlogPostEdit = () => {
 	const { slug } = useParams();
@@ -13,9 +13,7 @@ const BlogPostEdit = () => {
 	const blogPost = blogList.find((post) => post.slug === slug);
 	const [thisPost, setThisPost] = useState(blogPost);
 
-	// console.log("-> blogPost", blogPost);
-
-	const canEdit = auth.user?.role().edit || blogPost.author === auth.user?.username;
+	const canEdit = auth.user?.userRole().edit || blogPost.author === auth.user?.username;
 
 	const returnToBlog = () => navigate(`/blog/${slug}`);
 
@@ -33,6 +31,7 @@ const BlogPostEdit = () => {
 		e.preventDefault();
 		const postIndex = blogList.findIndex((post) => post.id === thisPost.id);
 
+		console.log("postIndex", postIndex);
 		blogList[postIndex] = thisPost;
 
 		updatePosts(blogList);

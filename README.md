@@ -5,8 +5,7 @@
 [x] Establish users and roles
 [-] Establish a database or localstorage manager
 [ ] Implement a blogs administration
-[x] Edit
+[x] Edit(after clic save, it doesn't rememeber the changes)
 
-- after clic save, it doesn't rememeber the changes
-  [ ] Add
-  [ ] Delete
+[ ] Add
+[ ] Delete

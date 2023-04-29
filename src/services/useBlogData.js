@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { blogdata } from "./blogdata";
+import { blogdata } from "../data/blogdata";
 
 function useBlogData() {
 	const [data, setData] = React.useState(blogdata);

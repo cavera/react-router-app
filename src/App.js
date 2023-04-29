@@ -1,14 +1,15 @@
-import "./App.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import { HomePage } from "./HomePage";
-import { BlogPage } from "./BlogPage";
-import { ProfilePage } from "./ProfilePage";
-import { Menu } from "./Menu";
-import { BlogPost } from "./BlogPost";
-import { LoginPage } from "./LoginPage";
-import { LogoutPage } from "./LogoutPage";
-import { AuthProvider, AuthRoute } from "./auth";
-import { BlogPostEdit } from "./BlogPostEdit";
+import { Menu } from "./components/Menu";
+import { HomePage } from "./pages/HomePage";
+import { BlogPage } from "./pages/BlogPage";
+import { BlogPost } from "./pages/BlogPage/BlogPost";
+import { BlogPostEdit } from "./pages/BlogPage/BlogPostEdit";
+import { ProfilePage } from "./pages/ProfilePage";
+import { LoginPage } from "./pages/LoginPage";
+import { LogoutPage } from "./pages/LogoutPage/";
+import { AuthProvider, AuthRoute } from "./services/Auth";
+
+import "./App.css";
 
 function App() {
 	return (
@@ -28,9 +29,14 @@ function App() {
 								path=':slug'
 								element={<BlogPost />}
 							/>
+
 							<Route
 								path=':slug/edit'
-								element={<BlogPostEdit />}
+								element={
+									<AuthRoute>
+										<BlogPostEdit />
+									</AuthRoute>
+								}
 							/>
 						</Route>
 						<Route
@@ -39,7 +45,11 @@ function App() {
 						/>
 						<Route
 							path='/logout'
-							element={<LogoutPage />}
+							element={
+								<AuthRoute>
+									<LogoutPage />
+								</AuthRoute>
+							}
 						/>
 						<Route
 							path='/profile'
